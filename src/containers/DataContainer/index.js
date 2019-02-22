@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { myThunkActionCreator } from './actions';
+import { navigation } from '../../utils/consts';
+
 class DataContainer extends Component {
+  componentDidMount() {
+    if (this.props.match.url === '/') {
+      this.props.history.push(navigation[0].link);
+    }
+  }
+
   render() {
-    console.log(this.props)
     return (
       <div>
         data
@@ -15,16 +22,17 @@ class DataContainer extends Component {
   }
 }
 
-
 const mapStateToProps = state => ({
   foo: state.appReducer.foo,
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    { myThunkActionCreator },
-    dispatch,
-  );
+  bindActionCreators({ myThunkActionCreator }, dispatch);
+
+DataContainer.propTypes = {
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired,
+};
 
 export default connect(
   mapStateToProps,

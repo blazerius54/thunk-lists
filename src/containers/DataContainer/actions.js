@@ -1,17 +1,27 @@
-import { GET_SOF_POSTS_REQUEST, GET_SOF_POSTS_SUCCESS, GET_SOF_POSTS_ERROR } from './consts';
+import {
+  GET_SOF_POSTS_REQUEST,
+  GET_SOF_POSTS_SUCCESS,
+  GET_SOF_POSTS_ERROR,
+} from './consts';
+import { getSofQuestions } from '../../network';
 
 export const getSofPostsRequests = () => ({
   type: GET_SOF_POSTS_REQUEST,
 });
 
-export function myThunkActionCreator() {
-  return (dispatch, getState) => {
-    dispatch({type : "GET_SOF_POSTS_REQUEST"});
+export const getSofPostsSuccess = sofQuestions => ({
+  type: GET_SOF_POSTS_SUCCESS,
+  sofQuestions,
+});
 
-    fetch("https://api.stackexchange.com/2.2/questions?order=desc&sort=activity&site=stackoverflow&filter=!9Z(-wzu0T")
-      .then(
-        response => dispatch({type : "REQUEST_SUCCEEDED", payload : response}),
-        error => dispatch({type : "REQUEST_FAILED", error : error})
-      );
+export function myThunkActionCreator() {
+  return dispatch => {
+    dispatch(getSofPostsRequests());
+
+    getSofQuestions()
+      .then(response => response.json())
+      .then(response => {
+        dispatch(getSofPostsSuccess(response.items));
+      });
   };
 }

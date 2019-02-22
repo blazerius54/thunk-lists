@@ -1,6 +1,7 @@
 import { createStore, compose, applyMiddleware } from 'redux';
-import createReducer from './reducers';
 import thunkMiddleware from 'redux-thunk';
+import createReducer from './reducers';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const persistedState = localStorage.getItem('reduxState')
   ? JSON.parse(localStorage.getItem('reduxState'))
@@ -16,11 +17,10 @@ export default function configureStore() {
 
   const store = createStore(
     createReducer(),
-    // persistedState,
-    // composeEnhancers(),
-    applyMiddleware(
-      thunkMiddleware, // позволяет нам отправлять функции
-    )
+    composeWithDevTools(
+      applyMiddleware(thunkMiddleware),
+      // other store enhancers if any
+    ),
   );
 
   if (module.hot) {

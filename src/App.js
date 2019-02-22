@@ -18,7 +18,7 @@ class App extends Component {
             <React.Fragment>
               <Header />
               <Switch>
-                <Route exact path="/:dataType" component={DataContainer} />
+                <Route exact path="/:dataType?" component={DataContainer} />
               </Switch>
             </React.Fragment>
           </Router>
