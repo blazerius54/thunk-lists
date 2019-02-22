@@ -25,3 +25,9 @@ button:focus {
 a {
   text-decoration: none;
 }
+
+.App {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

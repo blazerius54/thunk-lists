@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { myThunkActionCreator } from './actions';
 import { navigation } from '../../utils/consts';
+import StackList from '../../components/StackList';
 
 class DataContainer extends Component {
   componentDidMount() {
@@ -13,10 +14,11 @@ class DataContainer extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
-        data
         <button onClick={this.props.myThunkActionCreator}>click</button>
+        <StackList/>
       </div>
     );
   }
@@ -24,6 +26,7 @@ class DataContainer extends Component {
 
 const mapStateToProps = state => ({
   foo: state.appReducer.foo,
+  sofQuestions: state.appReducer.sofQuestions,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -32,6 +35,7 @@ const mapDispatchToProps = dispatch =>
 DataContainer.propTypes = {
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
+  sofQuestions: PropTypes.array.isRequired,
 };
 
 export default connect(
