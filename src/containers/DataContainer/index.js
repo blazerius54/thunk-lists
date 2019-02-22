@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { myThunkActionCreator } from './actions';
 import { navigation } from '../../utils/consts';
 import StackList from '../../components/StackList';
+import { MainWrapper } from './styled';
 
 class DataContainer extends Component {
   componentDidMount() {
@@ -15,11 +16,12 @@ class DataContainer extends Component {
 
   render() {
     console.log(this.props);
+    const { sofQuestions } = this.props;
     return (
-      <div>
+      <MainWrapper>
         <button onClick={this.props.myThunkActionCreator}>click</button>
-        <StackList/>
-      </div>
+        <StackList sofQuestions={sofQuestions} />
+      </MainWrapper>
     );
   }
 }

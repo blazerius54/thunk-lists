@@ -13,6 +13,10 @@ code {
     monospace;
 }
 
+p {
+  margin: 0;
+}
+
 button {
   background: transparent;
   border: none;
@@ -30,4 +34,5 @@ a {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  align-items: center;
 }
