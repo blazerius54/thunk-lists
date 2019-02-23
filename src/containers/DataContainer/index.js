@@ -22,6 +22,7 @@ class DataContainer extends Component {
       match,
       sendStackOverflowRequest,
       sendGithubRequest,
+      loading,
     } = this.props;
     const GH_ACTIVE_COMPONENT = navigation[0].link === match.url;
     const SOF_ACTIVE_COMPONENT = navigation[1].link === match.url;
@@ -29,12 +30,13 @@ class DataContainer extends Component {
     return (
       <MainWrapper>
         {GH_ACTIVE_COMPONENT && (
-          <GhList ghRepos={ghRepos} sendGithubRequest={sendGithubRequest} />
+          <GhList ghRepos={ghRepos} sendGithubRequest={sendGithubRequest} loading={loading} />
         )}
         {SOF_ACTIVE_COMPONENT && (
           <StackList
             sofQuestions={sofQuestions}
             sendStackOverflowRequest={sendStackOverflowRequest}
+            loading={loading}
           />
         )}
       </MainWrapper>
@@ -45,6 +47,7 @@ class DataContainer extends Component {
 const mapStateToProps = state => ({
   sofQuestions: state.appReducer.sofQuestions,
   ghRepos: state.appReducer.ghRepos,
+  loading: state.appReducer.loading,
 });
 
 const mapDispatchToProps = dispatch =>
@@ -57,6 +60,7 @@ DataContainer.propTypes = {
   match: PropTypes.object.isRequired,
   sofQuestions: PropTypes.array.isRequired,
   ghRepos: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default connect(

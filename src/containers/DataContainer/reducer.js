@@ -21,6 +21,8 @@ function appReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        ghRepos: [],
+        sofQuestions: [],
       };
     case GET_SOF_POSTS_SUCCESS:
       return {

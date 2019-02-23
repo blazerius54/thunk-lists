@@ -8,6 +8,7 @@ import {
   PostOwner,
   OwnerAvatar,
   PostHeader,
+  Loader,
 } from '../CommonStyled';
 
 class StackList extends React.Component {
@@ -16,9 +17,12 @@ class StackList extends React.Component {
   }
 
   render() {
-    const { sofQuestions } = this.props;
+    const { sofQuestions, loading } = this.props;
     return (
       <ContentListWrapper>
+        {
+          loading && <Loader>Loading</Loader>
+        }
         {sofQuestions.length > 0 &&
           sofQuestions.map(({ owner, title, link, creation_date, tags }) => (
             <SinglePost key={creation_date}>
@@ -54,6 +58,7 @@ class StackList extends React.Component {
 StackList.propTypes = {
   sofQuestions: PropTypes.array.isRequired,
   sendStackOverflowRequest: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default StackList;

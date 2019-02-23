@@ -7,6 +7,7 @@ import {
   PostOwner,
   OwnerAvatar,
   PostHeader,
+  Loader,
 } from '../CommonStyled';
 
 class GhList extends React.Component {
@@ -15,10 +16,13 @@ class GhList extends React.Component {
   }
 
   render() {
-    const { ghRepos } = this.props;
+    const { ghRepos, loading } = this.props;
     return (
       <ContentListWrapper>
-        {ghRepos.length > 0 &&
+        {
+          loading && <Loader>Loading</Loader>
+        }
+        {!loading && ghRepos.length > 0 &&
           ghRepos.map(({ owner, description, full_name, html_url, id }) => (
             <SinglePost key={id}>
               <PostHeader>
@@ -47,6 +51,7 @@ class GhList extends React.Component {
 GhList.propTypes = {
   ghRepos: PropTypes.array.isRequired,
   sendGithubRequest: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default GhList;

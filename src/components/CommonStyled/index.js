@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const ContentListWrapper = styled.div`
   width: 100%;
@@ -44,4 +44,18 @@ export const OwnerAvatar = styled.div`
     align-self: center;
     border-radius: 100%;
   }
+`;
+
+const leaves = keyframes` 
+  0% {
+    transform: scale(1.0);
+}
+  100% {
+    transform: scale(1.1);
+}`;
+
+export const Loader = styled.p`
+  text-align: center;
+  margin-top: 40px;
+  animation: ${leaves} 0.5s infinite alternate;
 `;
