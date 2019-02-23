@@ -8,8 +8,8 @@ import {
   PostOwner,
   OwnerAvatar,
   PostHeader,
-  Loader,
 } from '../CommonStyled';
+import LoaderComponent from '../LoaderComponent';
 
 class StackList extends React.Component {
   componentDidMount() {
@@ -20,9 +20,7 @@ class StackList extends React.Component {
     const { sofQuestions, loading } = this.props;
     return (
       <ContentListWrapper>
-        {
-          loading && <Loader>Loading</Loader>
-        }
+        {loading && <LoaderComponent />}
         {sofQuestions.length > 0 &&
           sofQuestions.map(({ owner, title, link, creation_date, tags }) => (
             <SinglePost key={creation_date}>

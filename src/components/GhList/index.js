@@ -7,8 +7,8 @@ import {
   PostOwner,
   OwnerAvatar,
   PostHeader,
-  Loader,
 } from '../CommonStyled';
+import LoaderComponent from '../LoaderComponent';
 
 class GhList extends React.Component {
   componentDidMount() {
@@ -19,10 +19,9 @@ class GhList extends React.Component {
     const { ghRepos, loading } = this.props;
     return (
       <ContentListWrapper>
-        {
-          loading && <Loader>Loading</Loader>
-        }
-        {!loading && ghRepos.length > 0 &&
+        {loading && <LoaderComponent />}
+        {!loading &&
+          ghRepos.length > 0 &&
           ghRepos.map(({ owner, description, full_name, html_url, id }) => (
             <SinglePost key={id}>
               <PostHeader>
