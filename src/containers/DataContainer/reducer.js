@@ -5,6 +5,7 @@ import {
   GET_GH_REPOS_REQUEST,
   GET_GH_REPOS_SUCCESS,
   GET_GH_REPOS_ERROR,
+  TOGGLE_MODAL,
 } from './consts';
 
 export const initialState = {
@@ -12,10 +13,11 @@ export const initialState = {
   error: '',
   ghRepos: [],
   sofQuestions: [],
+  showModal: true,
 };
 
 function appReducer(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case GET_SOF_POSTS_REQUEST:
     case GET_GH_REPOS_REQUEST:
       return {
@@ -35,6 +37,11 @@ function appReducer(state = initialState, action) {
         ...state,
         loading: false,
         ghRepos: action.ghRepos,
+      };
+    case TOGGLE_MODAL:
+      return {
+        ...state,
+        showModal: false,
       };
     default:
       return state;

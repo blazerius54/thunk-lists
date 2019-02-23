@@ -5,10 +5,11 @@ import {
   GET_GH_REPOS_REQUEST,
   GET_GH_REPOS_SUCCESS,
   GET_GH_REPOS_ERROR,
+  TOGGLE_MODAL,
 } from './consts';
 import { getSofQuestions, getGhRepos } from '../../network';
 
-// Action creators
+// Sync action creators
 
 export const getSofPostsRequests = () => ({
   type: GET_SOF_POSTS_REQUEST,
@@ -26,6 +27,10 @@ export const getGhReposRequests = () => ({
 export const getGhReposSuccess = ghRepos => ({
   type: GET_GH_REPOS_SUCCESS,
   ghRepos,
+});
+
+export const toggleModal = () => ({
+  type: TOGGLE_MODAL,
 });
 
 // Thunks
