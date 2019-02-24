@@ -22,6 +22,7 @@ class DataContainer extends Component {
 
   redirectFromModal = () => {
     this.props.history.push(`${this.props.match.params.dataType}/details`);
+    // this.props.toggleModal();
   };
 
   render() {
@@ -45,6 +46,7 @@ class DataContainer extends Component {
             ghRepos={ghRepos}
             sendGithubRequest={sendGithubRequest}
             loading={loading}
+            toggleModal={toggleModal}
           />
         )}
         {SOF_ACTIVE_COMPONENT && (

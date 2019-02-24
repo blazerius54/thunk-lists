@@ -7,6 +7,7 @@ import {
   PostOwner,
   OwnerAvatar,
   PostHeader,
+  HeaderButtons,
 } from '../CommonStyled';
 import LoaderComponent from '../LoaderComponent';
 
@@ -16,7 +17,7 @@ class GhList extends React.Component {
   }
 
   render() {
-    const { ghRepos, loading } = this.props;
+    const { ghRepos, loading, toggleModal } = this.props;
     return (
       <ContentListWrapper>
         {loading && <LoaderComponent />}
@@ -33,11 +34,16 @@ class GhList extends React.Component {
                   )}
                   {full_name}
                 </PostOwner>
-                <button>
-                  <a target="_blank" href={html_url}>
-                    watch
-                  </a>
-                </button>
+                <HeaderButtons>
+                  <button>
+                    <a target="_blank" href={html_url}>
+                      link
+                    </a>
+                  </button>
+                  <button onClick={() => toggleModal(full_name)}>
+                    details
+                  </button>
+                </HeaderButtons>
               </PostHeader>
               <PostContent>{description}</PostContent>
             </SinglePost>
@@ -50,6 +56,7 @@ class GhList extends React.Component {
 GhList.propTypes = {
   ghRepos: PropTypes.array.isRequired,
   sendGithubRequest: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
 };
 

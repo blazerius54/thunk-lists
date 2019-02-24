@@ -13,7 +13,7 @@ export const initialState = {
   error: '',
   ghRepos: [],
   sofQuestions: [],
-  showModal: true,
+  showModal: false,
 };
 
 function appReducer(state = initialState, action) {
@@ -41,7 +41,7 @@ function appReducer(state = initialState, action) {
     case TOGGLE_MODAL:
       return {
         ...state,
-        showModal: false,
+        showModal: !state.showModal,
       };
     default:
       return state;

@@ -12,7 +12,7 @@ const ModalWindow = ({toggleModal, redirectFromModal}) => (
       <p>Посмотреть подробную информацию?</p>
       <ButtonContainer>
         <ModalBtn onClick={redirectFromModal}>Да</ModalBtn>
-        <ModalBtn onClick={toggleModal}>Нет</ModalBtn>
+        <ModalBtn onClick={() => toggleModal()}>Нет</ModalBtn>
       </ButtonContainer>
     </ModalContent>
   </ModalBackground>

@@ -17,6 +17,7 @@ export default function configureStore() {
 
   const store = createStore(
     createReducer(),
+    persistedState,
     composeWithDevTools(
       applyMiddleware(thunkMiddleware),
       // other store enhancers if any

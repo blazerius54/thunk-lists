@@ -29,8 +29,9 @@ export const getGhReposSuccess = ghRepos => ({
   ghRepos,
 });
 
-export const toggleModal = () => ({
+export const toggleModal = payload => ({
   type: TOGGLE_MODAL,
+  payload,
 });
 
 // Thunks
