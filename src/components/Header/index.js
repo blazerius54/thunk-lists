@@ -13,7 +13,7 @@ class Header extends Component {
             {navigation.map(({ title, link }) => (
               <NavItem
                 key={title}
-                active={this.props.location.pathname === link}
+                active={this.props.location.pathname.split('/')[1] === link.split('/')[1]}
               >
                 <Link to={link}>
                   <button>{title}</button>

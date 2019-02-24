@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   OwnerAvatar,
   PostHeader,
@@ -9,7 +10,6 @@ import {
   RowValue,
 } from '../CommonStyled';
 import GhDetails from '../GhDetails';
-import PropTypes from 'prop-types';
 
 const SofDetails = ({ sofDetails }) => (
   <SinglePostDetails>
@@ -21,11 +21,9 @@ const SofDetails = ({ sofDetails }) => (
         </OwnerAvatar>
       )}
       <HeaderButtons>
-        <button>
-          <a target="_blank" rel="noopener noreferrer" href={sofDetails.link}>
-            stack link
-          </a>
-        </button>
+        <a target="_blank" rel="noopener noreferrer" href={sofDetails.link}>
+          <button>stack link</button>
+        </a>
       </HeaderButtons>
     </PostHeader>
     <PostRow>

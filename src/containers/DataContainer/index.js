@@ -22,7 +22,6 @@ class DataContainer extends Component {
 
   redirectFromModal = () => {
     this.props.history.push(`${this.props.match.params.dataType}/details`);
-    // this.props.toggleModal();
   };
 
   render() {

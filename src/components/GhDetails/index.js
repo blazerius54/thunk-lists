@@ -21,15 +21,13 @@ const GhDetails = ({ ghRepoDetails }) => (
         </OwnerAvatar>
       )}
       <HeaderButtons>
-        <button>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={ghRepoDetails.svn_url}
-          >
-            repo link
-          </a>
-        </button>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={ghRepoDetails.svn_url}
+        >
+          <button>repo link</button>
+        </a>
       </HeaderButtons>
     </PostHeader>
     <PostRow>
