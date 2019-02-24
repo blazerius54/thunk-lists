@@ -15,13 +15,15 @@ export const NavList = styled.ul`
 
 export const NavItem = styled.li`
   display: inline;
+
   button {
+      color: ${props => (props.active ? '#ff5984' : '#fff')};
+
     &:hover {
       cursor: pointer;
     }
 
     a {
-      color: #fff;
       font-weight: 600;
     }
   }

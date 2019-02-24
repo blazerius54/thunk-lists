@@ -35,11 +35,15 @@ class GhList extends React.Component {
                   {full_name}
                 </PostOwner>
                 <HeaderButtons>
-                  <button>
-                    <a target="_blank" href={html_url}>
+                    <a
+                      target="_blank"
+                      href={html_url}
+                      rel="noopener noreferrer"
+                    >
+                      <button>
                       link
-                    </a>
                   </button>
+                    </a>
                   <button onClick={() => toggleModal(full_name)}>
                     details
                   </button>

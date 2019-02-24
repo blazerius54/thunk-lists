@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {
   ModalBackground,
   ModalContent,
@@ -6,7 +7,7 @@ import {
   ModalBtn,
 } from './styled';
 
-const ModalWindow = ({toggleModal, redirectFromModal}) => (
+const ModalWindow = ({ toggleModal, redirectFromModal }) => (
   <ModalBackground>
     <ModalContent>
       <p>Посмотреть подробную информацию?</p>
@@ -17,5 +18,10 @@ const ModalWindow = ({toggleModal, redirectFromModal}) => (
     </ModalContent>
   </ModalBackground>
 );
+
+ModalWindow.propTypes = {
+  redirectFromModal: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
+};
 
 export default ModalWindow;

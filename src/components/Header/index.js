@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { HeaderWrapper, HeaderNav, NavList, NavItem } from './styled';
 import { navigation } from '../../utils/consts';
 
@@ -11,11 +11,14 @@ class Header extends Component {
         <HeaderNav>
           <NavList>
             {navigation.map(({ title, link }) => (
-              <NavItem key={title}>
-                <button>
-                  <Link to={link}>{title}</Link>
-                </button>
-                </NavItem>
+              <NavItem
+                key={title}
+                active={this.props.location.pathname === link}
+              >
+                <Link to={link}>
+                  <button>{title}</button>
+                </Link>
+              </NavItem>
             ))}
           </NavList>
         </HeaderNav>
@@ -24,4 +27,8 @@ class Header extends Component {
   }
 }
 
-export default Header;
+Header.propTypes = {
+  location: PropTypes.object.isRequired,
+};
+
+export default withRouter(Header);

@@ -10,7 +10,7 @@ import {
 
 export const initialState = {
   loading: false,
-  error: '',
+  error: false,
   ghRepos: [],
   sofQuestions: [],
   showModal: false,
@@ -23,6 +23,7 @@ function appReducer(state = initialState, action) {
       return {
         ...state,
         loading: true,
+        error: false,
         ghRepos: [],
         sofQuestions: [],
       };
@@ -37,6 +38,12 @@ function appReducer(state = initialState, action) {
         ...state,
         loading: false,
         ghRepos: action.ghRepos,
+      };
+    case GET_GH_REPOS_ERROR:
+    case GET_SOF_POSTS_ERROR:
+      return {
+        ...state,
+        error: true,
       };
     case TOGGLE_MODAL:
       return {

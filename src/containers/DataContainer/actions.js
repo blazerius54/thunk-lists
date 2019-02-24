@@ -20,6 +20,10 @@ export const getSofPostsSuccess = sofQuestions => ({
   sofQuestions,
 });
 
+export const getSofPostsError = () => ({
+  type: GET_SOF_POSTS_ERROR,
+});
+
 export const getGhReposRequests = () => ({
   type: GET_GH_REPOS_REQUEST,
 });
@@ -27,6 +31,10 @@ export const getGhReposRequests = () => ({
 export const getGhReposSuccess = ghRepos => ({
   type: GET_GH_REPOS_SUCCESS,
   ghRepos,
+});
+
+export const getGhReposError = () => ({
+  type: GET_GH_REPOS_ERROR,
 });
 
 export const toggleModal = payload => ({
@@ -44,7 +52,8 @@ export function sendStackOverflowRequest() {
       .then(response => response.json())
       .then(response => {
         dispatch(getSofPostsSuccess(response.items));
-      });
+      })
+      .catch(err => dispatch(getSofPostsError()));
   };
 }
 
@@ -56,6 +65,7 @@ export function sendGithubRequest() {
       .then(response => response.json())
       .then(response => {
         dispatch(getGhReposSuccess(response.slice(0, 15)));
-      });
+      })
+      .catch(err => dispatch(getGhReposError()));
   };
 }

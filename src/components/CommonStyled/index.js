@@ -41,7 +41,10 @@ export const PostRow = styled.div`
   justify-content: space-between;
 `;
 
-export const RowProp = styled.p``;
+export const RowProp = styled.p`
+  align-self: flex-start;
+  margin-right: 10px;
+`;
 
 export const PostHeader = styled.header`
   display: flex;

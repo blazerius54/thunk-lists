@@ -54,6 +54,7 @@ class DataContainer extends Component {
             sofQuestions={sofQuestions}
             sendStackOverflowRequest={sendStackOverflowRequest}
             loading={loading}
+            toggleModal={toggleModal}
           />
         )}
         {showModal && (

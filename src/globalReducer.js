@@ -1,7 +1,7 @@
 import { TOGGLE_MODAL } from './containers/DataContainer/consts';
 
 export const initialState = {
-  repoFullName: 'reducer',
+  urlRequest: '',
 };
 
 function globalReducer(state = initialState, action) {
@@ -9,7 +9,7 @@ function globalReducer(state = initialState, action) {
     case TOGGLE_MODAL:
       return {
         ...state,
-        repoFullName: action.payload,
+        urlRequest: action.payload,
       };
     default:
       return state;

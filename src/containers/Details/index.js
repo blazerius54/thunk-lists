@@ -2,78 +2,42 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import moment from 'moment/moment';
-import { sendGhDetailsRequest } from './actions';
+import { sendGhDetailsRequest, sendSofDetailsRequest } from './actions';
 import { toggleModal } from '../DataContainer/actions';
-import {
-  ContentListWrapper,
-  SinglePost,
-  SinglePostWrapper,
-  PostContent,
-  PostOwner,
-  OwnerAvatar,
-  PostHeader,
-  HeaderButtons,
-  PostRow,
-  RowProp,
-  RowValue,
-  SinglePostDetails,
-} from '../../components/CommonStyled';
+import { SinglePostWrapper } from '../../components/CommonStyled';
+import GhDetails from '../../components/GhDetails';
+import SofDetails from '../../components/SofDetails';
 
 class Details extends React.Component {
   componentDidMount() {
-    if (this.props.showModal) {
-      this.props.toggleModal(this.props.repoFullName);
+    const {
+      showModal,
+      toggleModal,
+      sendGhDetailsRequest,
+      sendSofDetailsRequest,
+      urlRequest,
+      match,
+    } = this.props;
+    if (showModal) {
+      toggleModal(urlRequest);
     }
-    this.props.sendGhDetailsRequest(this.props.repoFullName);
+    if (match.params.dataType === 'gh') {
+      sendGhDetailsRequest(urlRequest);
+    }
+
+    if (match.params.dataType === 'sf') {
+      sendSofDetailsRequest(urlRequest);
+    }
   }
 
   render() {
-    const { ghRepoDetails } = this.props;
+    const { ghRepoDetails, sofDetails } = this.props;
     return (
       <SinglePostWrapper>
         {ghRepoDetails &&
-          ghRepoDetails.owner && (
-          <SinglePostDetails>
-            <PostHeader>
-              {ghRepoDetails.owner &&
-                  ghRepoDetails.owner.avatar_url && (
-                <OwnerAvatar>
-                  <img src={ghRepoDetails.owner.avatar_url} alt="avatar" />
-                </OwnerAvatar>
-              )}
-              <HeaderButtons>
-                  <button>
-                    <a target="_blank" href={ghRepoDetails.svn_url}>
-                      repo link
-                  </a>
-                  </button>
-              </HeaderButtons>
-            </PostHeader>
-            <PostRow>
-              <RowProp>User:</RowProp>
-              <RowValue>{ghRepoDetails.owner.login}</RowValue>
-            </PostRow>
-            <PostRow>
-              <RowProp>Repo`s name::</RowProp>
-              <RowValue>{ghRepoDetails.name}</RowValue>
-            </PostRow>
-            <PostRow>
-              <RowProp>Forks:</RowProp>
-              <RowValue>{ghRepoDetails.forks}</RowValue>
-            </PostRow>
-            <PostRow>
-              <RowProp>Created:</RowProp>
-              <RowValue>
-                {moment(ghRepoDetails.created_at).format('DD.MM.YYYY')}
-              </RowValue>
-            </PostRow>
-            <PostRow>
-              <RowProp>Total issues:</RowProp>
-              <RowValue>{ghRepoDetails.open_issues_count}</RowValue>
-            </PostRow>
-          </SinglePostDetails>
-        )}
+          ghRepoDetails.owner && <GhDetails ghRepoDetails={ghRepoDetails} />}
+        {sofDetails &&
+          sofDetails.owner && <SofDetails sofDetails={sofDetails} />}
       </SinglePostWrapper>
     );
   }
@@ -82,17 +46,24 @@ class Details extends React.Component {
 const mapStateToProps = state => ({
   loading: state.detailsReducer.loading,
   ghRepoDetails: state.detailsReducer.ghRepoDetails,
-  repoFullName: state.globalReducer.repoFullName,
+  sofDetails: state.detailsReducer.sofDetails,
+  urlRequest: state.globalReducer.urlRequest,
   showModal: state.appReducer.showModal,
 });
 
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ sendGhDetailsRequest, toggleModal }, dispatch);
+  bindActionCreators(
+    { sendGhDetailsRequest, toggleModal, sendSofDetailsRequest },
+    dispatch,
+  );
 
 Details.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  repoFullName: PropTypes.string.isRequired,
-  ghRepoDetails: PropTypes.object.isRequired,
+  sendGhDetailsRequest: PropTypes.func.isRequired,
+  sendSofDetailsRequest: PropTypes.func.isRequired,
+  urlRequest: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    .isRequired,
+  ghRepoDetails: PropTypes.object,
+  sofDetails: PropTypes.object,
 };
 
 export default connect(
